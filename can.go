@@ -9,12 +9,12 @@ import (
 
 // Recover from a panic and set the recovered value to an error pointer.
 func Recover(p *error) {
-	if r := recover(); r != nil {
-		e, ok := r.(error)
+	if v := recover(); v != nil {
+		e, ok := v.(error)
 		if ok {
 			*p = e
 		} else {
-			*p = errors.New(fmt.Sprint(r))
+			panic(v)
 		}
 	}
 }
